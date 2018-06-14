@@ -1,0 +1,25 @@
+<fieldset ngForm="addressForm" #addressForm="ngForm">
+      <div class="form-inline">
+        <label for="street">Street</label>
+        <input type="text" class="form-control" id="street" [(ngModel)]="street" name="street">
+      </div>
+      <div class="form-inline">
+        <label for="zip">Zip</label>
+        <input #newZip type="text" class="form-control" id="zip" [(ngModel)]="zip"
+        (blur)="PopulateCityState(newZip.value)" name="zip">
+      </div>
+
+      <div class="form-inline">
+        <label for="zip">City</label>
+        <input type="text" class="form-control" id="city" [(ngModel)]="apiresponseobj.city" name="city">
+     </div>
+     <div class="form-inline">
+        <label for="state">State</label>
+        <select #stateval class="form-control" id="state" 
+        [(ngModel)]="apiresponseobj.state" name="state" (ngModelChange)="onDropdownChange(stateval.value)"
+            >
+            <option *ngFor="let pow of state" [value]="pow">{{pow}}</option>
+        </select>
+        {{apiresponseobj.state}}
+    </div>
+    </fieldset>

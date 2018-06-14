@@ -1,0 +1,90 @@
+<div>
+<h2>exercise three - forms elements, angular inputs/outputs, validators, formatters</h2>
+    <ul>
+    <li>create form with below controls</li>
+      <li>ssn (textbox)</li>
+      <li>address component - update address component with below html inputs and functionality
+        <ul><li>street (textbox)</li>
+        <li>zip (textbox)</li>
+        <li>city (textbox)</li>
+        <li>state (dropdown)</li>
+        <li>When valid 5 digit zip code is entered and user focus out from zip code textbox, populate the city and state automatically (using Api getCityState function implemented in exercise one.) </li>
+        <li>set (VA, CA, KY) options in the state dropdown statically. </li>
+        <li>using angular input we should be able to set the VA as the default selected state (when user intially lands to this page).</li>
+        <li>use angular output to send back the selected state from dropdown back to parent component selectedState property. Hint: use angular input/output</li>
+        </ul>
+        </li>
+
+      <li>create a angular formatter directive to format the ssn like ###-##-####. 
+      <ul>
+        <li>it should automatically add the dash when user types ssn (if on type not possible you can format on focus out). </li>
+        <li>write a unit test for this formatter to make sure it works properly on any input value. (use exercise.spec.ts file to write your test cases, and you can run the unit tests using navigation link "Run Unit tests")</li>
+        <li>Ex:  123 -> 123
+            12 -> 12
+            1234 -> 123-4
+            12345 -> 123-45
+            123456 -> 123-45-6
+            etc...</li>
+            </ul>
+            </li>
+
+      <li>create a angular validator to validate the ssn input value is in ###-##-#### format. 
+        <ul><li>show validation error messages (below the input in red color) if ssn input is empty or invalid format. </li>
+        <li>validation should only start when user focus out for the first time from the input, after that it will display the validation in realtime.</li>
+        <li>input should contain red color border if invalid.</li>
+        </ul>
+        </li>
+      
+      <li>address component should have public function to return the formatted address in below format.
+        <ul><li>ex: street, city, state zipcode</li></ul>
+        </li>
+      
+      <li>wrap all input elements inside the html form.a
+        <ul><li>add a button to reset the form elements to default values.</li>
+        <li>add another button to submit the form to dummy.json file with below json POST body and show the returned JSON response "successMessage" value in the html below the form. 
+          (note ssn doesnt have dashes and address is formatted using previous format function form address component.)</li>
+          <li><code>"ssn": "123456789", "address": "street, city, state zip"</code></li>
+          </ul>
+          </li>
+      
+      <li>OPTIONAL - add a route guard for this route (exercise-three), so that it wont allow user to change the route without confirming (use vanilla js confirm window). 
+        <ul><li>only show this confirm when form is dirty. (if member reset form input elements this confirm message should not show up)</li>
+        </ul>
+        </li>
+      </ul>
+      <div class="container">
+    <h3>User Form</h3>
+    <form #userInputForm="ngForm" name="exercisethreeForm" novalidate>
+      <div class="form-inline">
+        <label for="name">SSN</label>
+        <input type="text" #inputssnctrl class="form-control" [(ngModel)]="ssn"
+        id="name" appSsnformatter name="ssn" maxlength="11" required #ssnInput="ngModel" [control]="ssnInput">
+       </div>
+       <div *ngIf="ssnInput.invalid && ssnInput.touched" class="alert alert-danger">
+            <small>
+            invalid SSN format (use ###-##-#### format)
+            </small>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-success" (click)="this.selectedAddress=addressinput.GetAddress();">Get Current Address</button>
+        </div>
+        <div *ngIf="!submitted">
+        {{selectedAddress}}
+        </div>
+       
+        <address #addressinput [selectedState] = "selectedState"
+                (notify)= 'onNotify($event)' #addressFields="childAddressFields" >
+        </address>
+
+        <button type="submit" class="btn btn-success" [disabled]="!userInputForm.form.valid"
+        (click)="OnSubmit();addressinput.ResetForm();userInputForm.reset()">Submit</button>
+        <button type="submit" class="btn btn-success" (click)="ResetControls();
+        addressinput.ResetForm();userInputForm.reset();">reset</button>
+      
+        <div *ngIf="submitted && !userInputForm.form.dirty && !addressFields.form.dirty"
+            class="alert alert-success"> your request is completed !!!</div>
+        <div> Selected State :{{selectedState}}</div>
+       
+    </form>
+</div>
+</div>

@@ -1,0 +1,37 @@
+<div>
+  <div>
+    <h2>exercise five - vanilla javascript, host binding</h2>
+    <ul>
+    <li>whats wrong with below code. it is binding data coming back from api call but this code is not performance friendly or working properly.
+      <ul>
+      <li>we just need to show members first name (from api response), fix this code (but do not use any additional variables or properties)
+      <br/><code>  <div *ngIf="loggedInMember$ | async as member; else loading">
+        Hi {{member.firstName}}</div></code>
+      </li>
+      </ul></li>
+
+    <li>update ClickGlobal component click function to update the last clicked time only when click on buttons with update-time css class.
+    <ul>
+    <li>don't create new functions or add click event on buttons. </li>
+    <li>update the existing click function with your solution.</li>
+    </ul></li>
+
+    <li>append "_PRODCT" string to each array item in productArray. and sort the array in ascending order. do not use for loop or foreach iterators. 
+    <ul>
+    <li>complete this solution by using javascript in-built array functions.</li>
+    </ul></li>
+    </ul>
+    <h3>Exercise results</h3>
+    <div><b>Appended result below with _PRODUCT and sorted in ascending order</b></div>
+        <div *ngFor = "let arr of productArray">{{arr}}</div>      
+    <br/>
+    <div><b>Fixed code to display firstname of logged in member</b></div>
+    <div *ngIf="loggedInMember$ | async as member; else loading">
+          Hi {{member.firstName}}
+    </div> <br/>
+    <div><b>ClickGlobal component results below</b></div>
+    <div click-global></div>
+    <ng-template #loading>
+       Loading firstname...
+    </ng-template>
+</div>

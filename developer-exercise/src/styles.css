@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+slide, slide-container {
+    display: block;
+    width: 100%;
+}
+
+.red {
+    color: red;
+}
+
+.inputtext {
+    color: red;
+    border-color: red;
+}
+
+.inputtext {
+    color: red;
+    border-color: red;
+}
+.ng-invalid:not(form).ng-touched {
+    border-color: #a94442;
+    color:#a94442;
+  }
+
+  .hide {
+     display: none; 
+  }

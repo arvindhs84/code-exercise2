@@ -1,0 +1,18 @@
+<div style="text-align:center">
+    <tbody>
+        <tr align="left">
+         <td>
+            <button [id]="p.title" *ngFor="let p of slides" (click)="onSelect(p.title)">{{p.title}}</button>
+         </td>   
+        </tr>
+        <tr align="left">
+            
+            <ng-content select="[slide1]" *ngIf="slide1visibility"></ng-content>
+            <ng-content select="[slide2]" *ngIf="slide2visibility"></ng-content>
+            <ng-content select="[slide3]" *ngIf="slide3visibility"></ng-content>
+            <ng-content select="[slide4]" *ngIf="slide4visibility"></ng-content>
+        </tr>
+    </tbody>
+    
+    
+</div>
